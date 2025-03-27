@@ -1,4 +1,9 @@
-module half_adder(input a,input b,output sum,output carry);
-xor XOR1(sum,a,b);
-and AND1(carry,a,b);
+module half_adder(
+    input A,
+    input B,
+    output Sum,
+    output Carry
+    );
+    assign Sum=A^B;
+    assign Carry=A&B;
 endmodule
