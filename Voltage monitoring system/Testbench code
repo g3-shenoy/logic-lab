@@ -12,7 +12,7 @@ wire within_range;
 
 // module instantiation
 voltage_monitor DUT(.clk(clk),.rst(rst),
-.adc_value(adc.value),.over_voltage(over_voltage),
+.adc_value(adc_value),.over_voltage(over_voltage),
 .under_voltage(under_voltage),.within_range(within_range));
 //file declaration
 initial
