@@ -1,0 +1,45 @@
+module voltage_monitor(
+    clk,
+    rst,
+    adc_value,
+    over_voltage,
+    under_voltage,
+    within_range
+    );//parameters
+    parameter adc_size=12;//analog to digital width
+    parameter lower_limit=1000;//minimum voltage value
+    parameter upper_limit=3000;//maximum voltage value
+    input clk;//Clock signal for synchronization
+    input rst;//reset signal for the system
+    input [adc_size-1:0]adc_value;//adc input value 
+    output reg over_voltage;//if voltage exceeds the upper limit -high
+    output reg under_voltage;//if voltage is below the lower limit-high
+    output reg within_range;//if voltage is within the limit-high
+    always @(posedge clk or posedge rst)
+    begin
+    if(rst)//reset the values
+    begin
+    over_voltage<=0;
+    under_voltage<=0;
+    within_range<=0;
+    end
+    else if(adc_value>upper_limit)//value crosses upper limit
+    begin
+    over_voltage<=1;
+    under_voltage<=0;
+    within_range<=0;
+    end
+    else if(adc_value<lower_limit)//value goes below lower limit
+    begin
+    over_voltage<=0;
+    under_voltage<=1;
+    within_range<=0;
+    end
+    else//value within the range
+    begin
+    over_voltage<=0;
+    under_voltage<=0;
+    within_range<=1;
+    end
+    end
+endmodule
